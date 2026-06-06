@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quản lý Phiếu Mượn Sách</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Quản lý Phiếu Mượn Sách</h1>
+  </header>
+
+  <main class="container">
+    <section class="controls">
+      <button id="btnAdd" class="btn primary">Thêm phiếu mượn</button>
+      <div class="stats">
+        <div>Tổng: <span id="statTotal">0</span></div>
+        <div>Đang mượn: <span id="statBorrowing">0</span></div>
+        <div>Đã trả: <span id="statReturned">0</span></div>
+      </div>
+    </section>
+
+    <section>
+      <table id="borrowTable">
+        <thead>
+          <tr>
+            <th>Mã</th>
+            <th>Họ tên</th>
+            <th>Mã sách</th>
+            <th>Thể loại</th>
+            <th>Ngày mượn</th>
+            <th>Hạn trả</th>
+            <th>Điện thoại</th>
+            <th>Email</th>
+            <th>Trạng thái</th>
+            <th>Ghi chú</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- form thêm phiếu mượn -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <header class="modal-header">
+        <h2 id="modalTitle">Thêm phiếu mượn</h2>
+        <button id="modalClose" class="btn close">x</button>
+      </header>
+
+      <form id="borrowForm" novalidate>
+        <input type="hidden" id="editingIndex" value="-1">
+
+        <div class="form-grid">
+          <label>
+            Mã phiếu mượn
+            <input id="borrowId" name="borrowId" type="text" placeholder="PM-0001">
+            <div class="error" id="errBorrowId"></div>
+          </label>
+
+          <label>
+            Họ tên người mượn
+            <input id="borrowerName" name="borrowerName" type="text" placeholder="Nguyễn Văn A">
+            <div class="error" id="errBorrowerName"></div>
+          </label>
+
+          <label>
+            Mã sách
+            <input id="bookId" name="bookId" type="text" placeholder="BK10234">
+            <div class="error" id="errBookId"></div>
+          </label>
+
+          <label>
+            Thể loại
+            <select id="category" name="category">
+              <option value="">-- Chọn thể loại --</option>
+              <option value="CNTT">CNTT</option>
+              <option value="Kinh tế">Kinh tế</option>
+              <option value="Ngoại ngữ">Ngoại ngữ</option>
+              <option value="Kỹ năng">Kỹ năng</option>
+            </select>
+            <div class="error" id="errCategory"></div>
+          </label>
+
+          <label>
+            Ngày mượn
+            <input id="borrowDate" name="borrowDate" type="date">
+            <div class="error" id="errBorrowDate"></div>
+          </label>
+
+          <label>
+            Hạn trả
+            <input id="dueDate" name="dueDate" type="date">
+            <div class="error" id="errDueDate"></div>
+          </label>
+
+          <label>
+            Số điện thoại
+            <input id="phone" name="phone" type="text" placeholder="09xxxxxxxx">
+            <div class="error" id="errPhone"></div>
+          </label>
+
+          <label>
+            Email liên hệ
+            <input id="email" name="email" type="email" placeholder="abc@library.vn">
+            <div class="error" id="errEmail"></div>
+          </label>
+
+          <label>
+            Trạng thái
+            <select id="status" name="status">
+              <option value="">-- Chọn trạng thái --</option>
+              <option value="Đang mượn">Đang mượn</option>
+              <option value="Đã trả">Đã trả</option>
+            </select>
+            <div class="error" id="errStatus"></div>
+          </label>
+
+          <label class="full">
+            Ghi chú
+            <textarea id="note" name="note" rows="3" placeholder="Tối đa 120 ký tự"></textarea>
+            <div class="error" id="errNote"></div>
+          </label>
+
+          <div class="modal-actions full">
+            <button type="button" id="btnCancel" class="btn">Hủy</button>
+            <button type="submit" id="btnSave" class="btn primary">Lưu</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
